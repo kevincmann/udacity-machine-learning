@@ -13668,7 +13668,7 @@ OVKGYRiGYRiGYRjL5P8Hlbw/WCOgmG0AAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Milk appears to have a correlation with Grocery and Detergents_Paper, Grocery appears to have a correlation with Detergents_Paper, and some of the other pairings seem to have very weak correlations. The feature that I attempted to predict, Fresh, seems to be uncorrelated with the other features based on a visual inspection, which confirms the idea that Fresh is important as a feature that can't be predicted from the others. The data appears to potentially have a log-normal distribution.</p>
+<p><strong>Answer:</strong> Milk appears to have a correlation with Grocery and Detergents_Paper, Grocery appears to have a correlation with Detergents_Paper, and some of the other pairings seem to have very weak correlations. The feature that I attempted to predict, Fresh, seems to be uncorrelated with the other features based on a visual inspection, which confirms the idea that Fresh is important as a feature that can't be predicted from the others. The data resembles a log-normal distribution, having a right skew.</p>
 
 </div>
 </div>
@@ -20551,9 +20551,35 @@ Sample point 2 predicted to be in Cluster 1
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-An A/B test in this scenario would involve choosing customers at random (with large enough representation from each cluster) to inform them of (or offer) a change in their delivery frequency, then judging who reacts most favorably. Aligning the results of the A/B test against the predicted clusters and looking for agreement might provide the ability to segregate by cluster who could be switched to the reduced frequency with good results.</p>
-<p>It would be ignorant to assume that the change would affect all customers equally, because the variety in the data indicates that the opposite is likely. For example, customers that purchase a large amount of perishable goods or that turnover inventory quickly will very probably react negatively to a reduction in delivery days.</p>
-<p>I would not recommend implementing a delivery frequency change without consulting the customers first. I believe the A/B test should be structured as a survey to a representative sample of customers falling into each segment. After the results are back and in the event that they indicate a likelihood of a favorable outcome, I would suggest letting the customers decide for themselves which frequency is best. I would recommend a pricing structure that should incentivize the customers to choose the most appropriate delivery frequency for their needs. This would probably include a discount for the 3-day delivery frequency vis-a-vis the 5-day frequency and possibly an increase in price for the 5-day delivery frequency versus its current price.</p>
+To perform an A/B test in this scenario, a representative sample of customers from each cluster should be randomly chosen and then divided evenly into control and treatment groups. There will be a control and treatment group for each cluster, and within each cluster the control and treatment groups should be the same size (or very nearly the same size).</p>
+<p>The control group from each cluster will be given no offer to change their delivery frequency, while the treatment group from each cluster will be offered to change their delivery frequency from 5 days a week to 3 days a week. The customer responses would provide representative data to determine a predicted rate for each cluster at which customers would be expected to change to the 3 day delivery frequency.</p>
+<p>If the company prefers, they can perform the testing on only one cluster at a time, but that should not result in a difference in the results, all else being equal. For example, whether we get the results for customers in Cluster B at the same time or after the results for customers in Cluster A, the different paths reach equivalency once the results are entered. However, it is probably preferred to reach out to all customers in all groups in all clusters simultaneously if possible so the risk of confounding effects are lessened (e.g. people might prematurely hear of the proposed change and that might cause them to act differently than otherwise; some major news could be released after one cluster has been tested and before another is started and that causes a change in business atmosphere that affects the results, etc.).</p>
+<p>The results summary should resemble this:</p>
+<table>
+<thead><tr>
+<th>Preference</th>
+<th>Cluster A</th>
+<th>Cluster B</th>
+<th>etc.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-day (Treatment)</td>
+<td>A%</td>
+<td>B%</td>
+<td>...</td>
+</tr>
+<tr>
+<td>5-day (Control)</td>
+<td>1-A%</td>
+<td>1-B%</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p>It would be wrong to assume that the change would affect all customers equally, because the variety in the data indicates that the opposite is likely. For example, customers that purchase a large amount of perishable goods or that turn inventory over quickly will very probably react more negatively to a reduction in delivery days.</p>
+<p>I doubt that an A/B testing approach is most appropriate in this situation, partly because the synopsis states "Companies will often run A/B tests when making <strong>small</strong> changes to their products or services to determine whether making that change will affect its customers positively or negatively" (emphasis added), and reducing the delivery frequency by 40% is quite a large change for all parties with potentially significant associated costs for the company.</p>
 
 </div>
 </div>
