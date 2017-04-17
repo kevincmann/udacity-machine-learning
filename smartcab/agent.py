@@ -24,6 +24,7 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         self.trial = 0
+        # DONE
 
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
@@ -44,6 +45,7 @@ class LearningAgent(Agent):
         if testing:
             self.epsilon = 0.0
             self.alpha = 0.0
+        # DONE
 
         return None
 
@@ -119,7 +121,7 @@ class LearningAgent(Agent):
             action = random.choice(self.valid_actions)
         #   Otherwise, choose an action with the highest Q-value for the current state
         else:
-            action = max(self.Q[state], key=self.Q[state].get)
+            action = random.choice([k for k, v in self.Q[state].items() if v == self.get_maxQ(state)])
         # DONE
 
         return action
@@ -135,7 +137,7 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        self.Q[state][action] = (1 - self.alpha) * self.Q[state][action] + self.alpha * reward
+        self.Q[state][action] += self.alpha * (reward - self.Q[state][action])
         # DONE
 
         return
@@ -187,7 +189,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, update_delay=0.1, display=True, log_metrics=True, optimized=True)
+    sim = Simulator(env, update_delay=0.01, display=True, log_metrics=True, optimized=True)
 
     ##############
     # Run the simulator
