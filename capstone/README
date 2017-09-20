@@ -1,0 +1,13 @@
+The stock price predictor takes any number of stock tickers, a start date, an end date, and a number of days in advance to predict, and fits a neural net to predict a future price.
+
+Libraries (with dependencies) required for the functioning of this program are:
+	numpy
+	quandl
+	pandas
+	matplotlib
+	sklearn
+	keras
+
+After installing these libraries, the program should run both in the jupyter notebook price_predictor.ipynb (Cell > Run All) or the script price_predictor.py.
+
+Quandl allows a number of anonymous queries for stock data (usually 50 but I don't know what it uses as an identifier); exceeding this limit requires an api_key. I tried using Yahoo! Finance, but the free api was no longer available when I last checked.
